@@ -5,7 +5,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -28,6 +30,9 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     TextView text;
     Map<String,String> colorMap = new HashMap<>();
 
+    Button share_button;
+    Button search_button;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,6 +53,10 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
         spinner.setOnItemSelectedListener(this);
+
+        share_button = (Button) findViewById(R.id.share_button);
+        search_button = (Button) findViewById(R.id.search_button);
+
 
         s_button.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -77,9 +86,33 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         });
 
 
+        share_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
+                name = nameInput.getText().toString();
 
+                Intent sendIntent = new Intent();
+                sendIntent.setAction(Intent.ACTION_SEND);
+                sendIntent.putExtra(Intent.EXTRA_TEXT, name);
+                sendIntent.setType("text/plain");
 
+                Intent shareIntent = Intent.createChooser(sendIntent, "Choose app");
+                startActivity(shareIntent);
+            }
+        });
+
+        search_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                name = nameInput.getText().toString();
+
+                Uri webpage = Uri.parse("https://www.google.com/search?q="+name);
+                Intent webIntent = new Intent(Intent.ACTION_VIEW, webpage);
+                startActivity(webIntent);
+            }
+        });
     }
 
     @Override
