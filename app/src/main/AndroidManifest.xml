@@ -9,9 +9,43 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.HelloWorld">
+
+        <activity android:name="intents.IntentFilterActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.LAUNCHER" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <action android:name="MSA.LAUNCH"/>
+                <data android:scheme="http"/>
+            </intent-filter>
+        </activity>
+        <activity android:name="intents.MainIntentActivity" >
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+                <action android:name="MSA.LAUNCH"/>
+                <action android:name="myfilter.LAUNCH"/>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:scheme="http"/>
+            </intent-filter>
+        </activity>
+        <activity android:name="lifecycle.ActivityA">
+            <intent-filter>
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name="lifecycle.ActivityC">
+            <intent-filter>
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name="lifecycle.ActivityB">
+            <intent-filter>
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity android:name=".MainActivity">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
